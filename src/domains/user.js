@@ -7,6 +7,14 @@ const createUserDb = async (email, password) => {
     data: {
       email: email,
       password: await bcrypt.hash(password, 10),
+      cart: {
+        create: {
+          total: 0.0,
+        },
+      },
+    },
+    include: {
+      cart: true,
     },
   })
 }

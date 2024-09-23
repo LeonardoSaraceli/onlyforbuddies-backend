@@ -7,6 +7,11 @@ async function main() {
       email: 'leonardolodi09@gmail.com',
       password: await bcrypt.hash('123', 10),
       role: 'ADMIN',
+      cart: {
+        create: {
+          total: 0.0,
+        },
+      },
     },
   })
 
