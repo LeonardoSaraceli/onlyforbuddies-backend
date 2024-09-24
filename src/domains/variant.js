@@ -17,6 +17,14 @@ const getVariantByIdDb = async (variantId) => {
     where: {
       id: variantId,
     },
+    include: {
+      sizes: {
+        include: {
+          size: true,
+        },
+      },
+      images: true,
+    },
   })
 }
 

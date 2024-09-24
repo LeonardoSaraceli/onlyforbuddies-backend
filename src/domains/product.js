@@ -3,7 +3,11 @@ import { prisma } from '../utils/prisma.js'
 const getAllProductsDb = async () => {
   return await prisma.product.findMany({
     include: {
-      variants: true,
+      variants: {
+        include: {
+          images: true,
+        },
+      },
       categories: true,
     },
   })
@@ -24,7 +28,16 @@ const getProductByIdDb = async (productId) => {
       id: productId,
     },
     include: {
-      variants: true,
+      variants: {
+        include: {
+          images: true,
+          sizes: {
+            include: {
+              size: true,
+            },
+          },
+        },
+      },
       categories: true,
     },
   })

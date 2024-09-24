@@ -7,6 +7,7 @@ import userRoute from './routes/user.js'
 import productRoute from './routes/product.js'
 import variantRoute from './routes/variant.js'
 import cartRoute from './routes/cart.js'
+import sizeRoute from './routes/size.js'
 import ApiError from './errors/ApiError.js'
 
 export const app = express()
@@ -19,6 +20,7 @@ app.use('/users', userRoute)
 app.use('/products', productRoute)
 app.use('/variants', variantRoute)
 app.use('/cart', cartRoute)
+app.use('/sizes', sizeRoute)
 
 app.use((error, req, res, next) => {
   if (error instanceof ApiError) {
