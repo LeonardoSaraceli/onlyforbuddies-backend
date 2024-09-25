@@ -3,6 +3,7 @@ import {
   createTokenDb,
   createUserDb,
   getUserByEmailDb,
+  getUserByIdDb,
 } from '../domains/user.js'
 import {
   BadRequestError,
@@ -58,4 +59,20 @@ const createToken = async (req, res) => {
   })
 }
 
-export { createUser, createToken }
+const getUserById = async (req, res) => {
+  const userId = Number(req.params.id)
+
+  const user = await getUserByIdDb(userId)
+
+  if (!user) {
+    throw new NotFoundError('User not found')
+  }
+
+  delete user.password
+
+  return res.json({
+    user,
+  })
+}
+
+export { createUser, createToken, getUserById }

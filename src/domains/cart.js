@@ -1,4 +1,5 @@
 import { prisma } from '../utils/prisma.js'
+import { getProductByIdDb } from './product.js'
 
 const getCartByIdDb = async (cartId) => {
   return await prisma.cart.findUnique({
@@ -144,10 +145,47 @@ const removeProductFromCartDb = async (
   )
 }
 
+const getProductCartByIdDb = async (cartId, productId) => {
+  return await prisma.productCart.findFirst({
+    where: {
+      cart_id: cartId,
+      variant_id: productId,
+    },
+  })
+}
+
+const clearCartProductsByIdDb = async (cartId, productId) => {
+  const productCart = await getProductCartByIdDb(cartId, productId)
+
+  await prisma.productCart.delete({
+    where: {
+      id: productCart.id,
+    },
+  })
+
+  const variant = await prisma.variant.findFirst({
+    where: {
+      id: productId,
+    },
+  })
+
+  return prisma.cart.update({
+    where: {
+      id: cartId,
+    },
+    data: {
+      total: {
+        decrement: variant.price * productCart.quantity,
+      },
+    },
+  })
+}
+
 export {
   getCartByIdDb,
   addProductToCartDb,
   verifyProductInCartDb,
   removeProductFromCartDb,
   deleteProductFromCartDb,
+  clearCartProductsByIdDb,
 }

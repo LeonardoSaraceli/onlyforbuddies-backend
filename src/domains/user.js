@@ -40,6 +40,19 @@ const getUserByIdDb = async (userId) => {
     where: {
       id: userId,
     },
+    include: {
+      addresses: true,
+      orders: {
+        include: {
+          products: true,
+        },
+      },
+      cart: {
+        include: {
+          products: true,
+        },
+      },
+    },
   })
 }
 

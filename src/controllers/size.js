@@ -14,17 +14,17 @@ const createProductSizeById = async (req, res) => {
     throw new NotFoundError('Product not found')
   }
 
-  const { productSize } = req.body
+  const { productSize, stock } = req.body
 
-  if (!productSize) {
+  if (!productSize || !stock) {
     throw new BadRequestError('Missing fields in request body')
   }
 
-  if (typeof productSize !== 'string') {
-    throw new BadRequestError('Size must be a string')
+  if (typeof productSize !== 'string' || typeof stock !== 'number') {
+    throw new BadRequestError('Incorrect data type')
   }
 
-  const size = await createProductSizeByIdDb(productId, productSize)
+  const size = await createProductSizeByIdDb(productId, productSize, stock)
 
   return res.status(201).json({
     size,

@@ -70,14 +70,17 @@ async function main() {
   await prisma.productSize.createMany({
     data: [
       {
+        stock: 12,
         size_id: 1,
         variant_id: 1,
       },
       {
+        stock: 5,
         size_id: 2,
         variant_id: 1,
       },
       {
+        stock: 8,
         size_id: 3,
         variant_id: 1,
       },

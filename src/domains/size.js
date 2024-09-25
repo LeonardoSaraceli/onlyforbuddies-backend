@@ -1,6 +1,6 @@
 import { prisma } from '../utils/prisma.js'
 
-const createProductSizeByIdDb = async (productId, productSize) => {
+const createProductSizeByIdDb = async (productId, productSize, stock) => {
   const size = await prisma.size.create({
     data: {
       size: productSize,
@@ -11,6 +11,7 @@ const createProductSizeByIdDb = async (productId, productSize) => {
     data: {
       variant_id: productId,
       size_id: size.id,
+      stock: stock,
     },
   })
 }
