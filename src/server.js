@@ -11,6 +11,7 @@ import sizeRoute from './routes/size.js'
 import imageRoute from './routes/image.js'
 import addressRoute from './routes/address.js'
 import orderRoute from './routes/order.js'
+import categoryRoute from './routes/category.js'
 import ApiError from './errors/ApiError.js'
 
 export const app = express()
@@ -27,6 +28,7 @@ app.use('/sizes', sizeRoute)
 app.use('/images', imageRoute)
 app.use('/addresses', addressRoute)
 app.use('/orders', orderRoute)
+app.use('/categories', categoryRoute)
 
 app.use((error, req, res, next) => {
   if (error instanceof ApiError) {
