@@ -6,6 +6,6 @@ const route = Router()
 
 route.post('/register', createUser)
 route.post('/login', createToken)
-route.get('/:id', isTokenValid, getUserById)
+route.get('/account', isTokenValid, getUserById)
 
 export default route

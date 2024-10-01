@@ -60,9 +60,9 @@ const createToken = async (req, res) => {
 }
 
 const getUserById = async (req, res) => {
-  const userId = Number(req.params.id)
+  const { id } = req.user
 
-  const user = await getUserByIdDb(userId)
+  const user = await getUserByIdDb(id)
 
   if (!user) {
     throw new NotFoundError('User not found')

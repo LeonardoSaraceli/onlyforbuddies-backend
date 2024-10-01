@@ -34,7 +34,7 @@ async function main() {
 
   await prisma.image.create({
     data: {
-      url: 'https://www.ideiapack-online.pt/WebRoot/ce_pt/Shops/960329864/6464/E8ED/C60D/930A/BD65/C0A8/1911/FF81/991512.4XL.jpg',
+      url: 'https://assets.wordans.pt/files/model_specifications/2011/6/29/6730/6730_original.png?1673622418',
       variant_id: variant.id,
     },
   })
